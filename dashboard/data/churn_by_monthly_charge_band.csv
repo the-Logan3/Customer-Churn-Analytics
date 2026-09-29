@@ -1,0 +1,5 @@
+monthly_charge_band,total_customers,churned_customers,retained_customers,churn_rate_pct,total_monthly_charges,churned_monthly_charges
+>$90,1739,570,1169,32.78,175671.50,56784.10
+$61-$90,2386,809,1577,33.91,183310.15,63262.20
+<=$30,1653,162,1491,9.80,35545.35,3583.75
+$31-$60,1265,328,937,25.93,61589.60,15500.80

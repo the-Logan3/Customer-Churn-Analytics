@@ -1,0 +1,6 @@
+tenure_group,total_customers,churned_customers,retained_customers,churn_rate_pct,total_monthly_charges,churned_monthly_charges
+0-6 months,1481,784,697,52.94,81067.95,49896.10
+7-12 months,705,253,452,35.89,41561.80,19058.15
+13-24 months,1024,294,730,28.71,62829.85,23081.65
+25-48 months,1594,325,1269,20.39,105093.30,27462.50
+49-72 months,2239,213,2026,9.51,165563.70,19632.45

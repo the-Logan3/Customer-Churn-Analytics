@@ -1,0 +1,2 @@
+total_customers,churned_customers,retained_customers,churn_rate_pct,avg_monthly_charge,total_monthly_charges,churned_monthly_charges,churned_charge_pct
+7043,1869,5174,26.54,64.76,456116.60,139130.85,30.50
