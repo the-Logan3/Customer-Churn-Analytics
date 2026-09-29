@@ -249,3 +249,104 @@ SELECT
         2
     ) AS churned_charge_pct
 FROM churn.customers;
+
+
+-- ============================================================
+-- CTE Example: Contract Churn Analysis
+-- ============================================================
+
+WITH contract_metrics AS (
+    SELECT
+        contract,
+        COUNT(*) AS total_customers,
+        COUNT(*) FILTER (WHERE churn_flag = 1) AS churned_customers
+    FROM churn.customers
+    GROUP BY contract
+)
+SELECT
+    contract,
+    total_customers,
+    churned_customers,
+    ROUND(
+        100.0 * churned_customers / total_customers,
+        2
+    ) AS churn_rate_pct
+FROM contract_metrics
+ORDER BY churn_rate_pct DESC;
+
+
+-- ============================================================
+-- Window Function Example: Rank Contracts by Churn Rate
+-- ============================================================
+
+WITH contract_metrics AS (
+    SELECT
+        contract,
+        COUNT(*) AS total_customers,
+        COUNT(*) FILTER (WHERE churn_flag = 1) AS churned_customers
+    FROM churn.customers
+    GROUP BY contract
+),
+contract_rates AS (
+    SELECT
+        contract,
+        total_customers,
+        churned_customers,
+        ROUND(
+            100.0 * churned_customers / total_customers,
+            2
+        ) AS churn_rate_pct
+    FROM contract_metrics
+)
+SELECT
+    contract,
+    total_customers,
+    churned_customers,
+    churn_rate_pct,
+    RANK() OVER (
+        ORDER BY churn_rate_pct DESC
+    ) AS churn_rate_rank
+FROM contract_rates
+ORDER BY churn_rate_rank;
+
+
+-- ============================================================
+-- HAVING Example: Churn by Service Count
+-- ============================================================
+
+SELECT
+    total_services,
+    COUNT(*) AS total_customers,
+    COUNT(*) FILTER (WHERE churn_flag = 1) AS churned_customers,
+    ROUND(
+        100.0
+        * COUNT(*) FILTER (WHERE churn_flag = 1)
+        / COUNT(*),
+        2
+    ) AS churn_rate_pct
+FROM churn.customers
+GROUP BY total_services
+HAVING COUNT(*) >= 500
+ORDER BY churn_rate_pct DESC;
+
+
+-- ============================================================
+-- CASE WHEN Example: Customer Churn Risk Category
+-- ============================================================
+
+SELECT
+    customer_id,
+    contract,
+    tenure,
+    monthly_charges,
+    churn_flag,
+    CASE
+        WHEN churn_flag = 1 AND contract = 'Month-to-month'
+            THEN 'High Risk'
+        WHEN churn_flag = 1
+            THEN 'Churned'
+        ELSE 'Retained'
+    END AS churn_risk_category
+FROM churn.customers
+ORDER BY monthly_charges DESC
+LIMIT 20;
