@@ -17,6 +17,10 @@ The project demonstrates a complete analytics workflow:
 - Business-focused SQL analysis
 - Interactive dashboard development using Tableau
 
+## Live Dashboard
+
+[View the interactive Tableau Public dashboard](https://public.tableau.com/app/profile/logesh.kanakaraj/viz/Customer_Churn_Retention_Analytics_17905993164320/ChurnRetentionDashboard)
+
 ## Business Questions
 
 The analysis addresses the following questions:
@@ -257,7 +261,3 @@ Customer-Churn-Analytics/
 │
 ├── .gitignore
 └── README.md
-
-## Live Dashboard
-
-[View the interactive Tableau Public dashboard](https://public.tableau.com/app/profile/logesh.kanakaraj/viz/Customer_Churn_Retention_Analytics_17905993164320/ChurnRetentionDashboard)
